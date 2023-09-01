@@ -5,8 +5,8 @@ import { createContactsThunk, deleteContactsThunk, getContactsThunk } from "./th
 const arrayThunks = [createContactsThunk, deleteContactsThunk, getContactsThunk]
 const thunkType = (type) => arrayThunks.map(thunk => thunk[type]) 
 
-const handlePending = (state) => {
-  state.isLoading = false;
+const handlePending = (state ) => {
+      state.isLoading = false;
 }
 
 const handleRejected = (state, {payload}) => {

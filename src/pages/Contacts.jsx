@@ -2,14 +2,16 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getError, getIsLoading } from 'store/contacts/selectors';
 import { getContactsThunk } from 'store/contacts/thunk';
-import { DivContainer, Section } from './App/App.styled';
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
-import { Filter } from './Filter/Filter';
-import { Loader } from './Loader/Loader';
+import { Loader } from 'components/Loader/Loader';
 
-export const App = () => {
+import React from 'react'
+import { ContactList } from 'components/ContactList/ContactList';
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import { Filter } from 'components/Filter/Filter';
+import { DivContainer, Section } from 'components/App/App.styled';
 
+
+ const Contacts = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
@@ -31,3 +33,5 @@ export const App = () => {
 
   );
 };
+
+export default Contacts;
