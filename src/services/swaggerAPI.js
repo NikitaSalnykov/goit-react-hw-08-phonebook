@@ -38,11 +38,10 @@ export const getUser = async (_, thunk) => {
   const persistedToken = state.auth.token;
 
       if (persistedToken === null) {
-      return;
+      return thunk.rejectWithValue('no access');;
     }
-
-  const resp = await axios.post(`/users/current`);
   setAuthHeader(persistedToken);
+  const resp = await axios.get(`/users/current`);
   return resp.data;
 };
 
@@ -53,20 +52,20 @@ export const getUser = async (_, thunk) => {
 
 export const fetchContacts = async () => {
   const resp = await axios.get(`/contacts`);
-  return resp;
+  return resp.data;
 };
 
 export const createContacts = async (contactData) => {
   const resp = await axios.post(`/contacts`, contactData);
-  return resp;
+  return resp.data;
 }; 
 
 export const deleteContacts = async (id) => {
   const resp = await axios.delete(`/contacts/${id}`);
-  return resp;
+  return resp.data;
 }; 
 
 export const updateContacts = async (id) => {
   const resp = await axios.patch(`/contacts/${id}`);
-  return resp;
+  return resp.data;
 }; 

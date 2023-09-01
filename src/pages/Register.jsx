@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
  import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { DivContainer } from 'components/App/App.styled';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { routes } from 'routes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createUserThunk } from 'store/auth/thunk' 
  
 const Register = () => {
     
   const dispatch = useDispatch()
+  const isAuth = useSelector(state => state.auth.token)
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+  isAuth && navigate(routes.HOME)
+  }, [isAuth, navigate])
+  
+
+  const handleRegister = (obj) => {
+    dispatch(createUserThunk({
+      "name": obj.name,
+      "email": obj.email,
+      "password": obj.password
+    }))
+  }
   
   return (
    <DivContainer>
@@ -27,11 +42,7 @@ const Register = () => {
          return errors;
        }}
         onSubmit={(values, { setSubmitting }) => {
-          dispatch(createUserThunk({
-            "name": values.name,
-            "email": values.email,
-            "password": values.password
-          }))
+          handleRegister(values);
           setSubmitting(false);
        }}
      >

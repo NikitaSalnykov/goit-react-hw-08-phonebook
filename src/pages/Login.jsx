@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
  import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { routes } from 'routes';
 import { DivContainer } from 'components/App/App.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUserThunk } from 'store/auth/thunk';
  
-const Login = () => (
-   <DivContainer>
+const Login = () => {
+
+  const dispatch = useDispatch()
+  const isAuth = useSelector(state => state.auth.token)
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+  isAuth && navigate(routes.HOME)
+  }, [isAuth, navigate])
+   
+  const handleLogIn = (obj) => {
+    dispatch(loginUserThunk({
+      "email": obj.email,
+      "password": obj.password
+    }))
+  }
+
+  return (
+
+      <DivContainer>
      <h1>Login</h1>
      <Formik
        initialValues={{ email: '', password: '' }}
@@ -21,7 +41,7 @@ const Login = () => (
          return errors;
        }}
        onSubmit={(values, { setSubmitting }) => {
-           console.log(values);
+         handleLogIn(values);
            setSubmitting(false);
        }}
      >
@@ -47,6 +67,7 @@ const Login = () => (
        <Link to={routes.REGISTER}>Sign Up</Link>
      </div>
    </DivContainer>
- );
+ 
+ )};
  
  export default Login;

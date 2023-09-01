@@ -36,7 +36,7 @@ export const ContactForm = () => {
       return;
     }
     
-    dispatch(createContactsThunk({name, phone: number}))
+    dispatch(createContactsThunk({name, number}))
     Notiflix.Notify.success('Contact added successfully');
   };
 

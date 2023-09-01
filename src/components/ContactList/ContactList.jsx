@@ -34,7 +34,7 @@ export const ContactList = () => {
             <div>
               <FaPhoneAlt size='18'/>
             <p> {contact.name}:</p>
-            <p>{contact.phone}</p>
+            <p>{contact.number}</p>
             </div>
             <button onClick={() => onDeleteBtn(contact.id)}><TiDelete size='24'/></button>
           </li>

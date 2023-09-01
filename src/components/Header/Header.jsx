@@ -10,6 +10,8 @@ export const Header = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
   const dispatch = useDispatch();
 
+   const handleLogout = () => dispatch(logoutUserThunk());
+
   return (
     <>
     <header>
@@ -18,9 +20,10 @@ export const Header = () => {
             <nav>
             <NavLink to={routes.HOME}>Home</NavLink>
             {isLoggedIn && <NavLink to={routes.CONTACTS}>Contacts</NavLink>}
-              {!isLoggedIn ?
+              {isLoggedIn ?
+              <Link to={routes.HOME} onClick={handleLogout} className="text-sm font-semibold text-gray-900 ml-0.5 hover:text-indigo-600">LogOut</Link>
+                :
                 <NavLink to={routes.LOGIN}>Log In</NavLink>
-                : <Link onClick={() => {dispatch(logoutUserThunk())}} >Log Out</Link>
                 }
           </nav>
         </div>
