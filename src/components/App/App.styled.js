@@ -13,7 +13,7 @@ export const DivContainer = styled.div`
     padding-left: 32px;
     padding-right: 32px;
   }
-    @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1200px) {
     width: 1200px;
     padding-left: 32px;
     padding-right: 32px;
@@ -29,7 +29,7 @@ export const Section = styled.section`
   }
 
   @media screen and (min-width: 1200px) {
-    padding-top: 16px;
+    padding-top: 36px;
     padding-bottom: 32px;
   }
 `;

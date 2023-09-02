@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
-export const Label = styled.label`
-font-style: italic;
-`
+export const FilterWrapper = styled.div`
+  display: flex;
+  align-items: self-end;
+  margin-bottom: 20px;
+`;
