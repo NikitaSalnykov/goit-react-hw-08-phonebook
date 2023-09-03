@@ -10,11 +10,20 @@ import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { DivContainer, Section } from 'components/App/App.styled';
 import { ContactsWrapper, ListWrapper } from './Contacts.styled';
+import { routes } from 'routes';
+import { useNavigate } from 'react-router-dom';
 
 const Contacts = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
+
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !isLoggedIn && navigate(routes.HOME);
+  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     dispatch(getContactsThunk());
