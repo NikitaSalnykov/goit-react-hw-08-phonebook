@@ -89,6 +89,7 @@ export const MobileHeader = () => {
               <Avatar {...stringAvatar(user.name)} />
             </IconButton>
             <Menu
+              style={{ top: '40px' }}
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
