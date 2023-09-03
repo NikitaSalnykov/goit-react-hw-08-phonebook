@@ -80,7 +80,7 @@ export const ContactForm = () => {
         variant="outlined"
         label="Number"
       />
-      <Button style={{ marginTop: '30px' }} variant="contained" type="submit">
+      <Button style={{ marginTop: '10px' }} variant="contained" type="submit">
         Add to contacts
       </Button>
     </Form>

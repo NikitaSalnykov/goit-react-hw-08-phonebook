@@ -7,7 +7,7 @@ import { getUserThunk } from 'store/auth/thunk';
 import Layout from 'components/Layout/Layout';
 
 const Contacts = lazy(() => import('pages/Contacts/Contacts'));
-const Home = lazy(() => import('pages/Home'));
+const Home = lazy(() => import('pages/Home/Home'));
 const Login = lazy(() => import('pages/Login/Login'));
 const Register = lazy(() => import('pages/Register/Register'));
 

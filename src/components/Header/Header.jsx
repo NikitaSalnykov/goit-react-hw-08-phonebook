@@ -8,9 +8,10 @@ import {
   HeaderOverlay,
   HeaderStyle,
   LoggedIn,
+  Logo,
+  LogoText,
   Navigation,
 } from './Header.styled';
-import { IoIosContacts } from 'react-icons/io';
 import { Avatar, Button } from '@mui/material';
 
 export const Header = () => {
@@ -24,7 +25,6 @@ export const Header = () => {
     let hash = 0;
     let i;
 
-    /* eslint-disable no-bitwise */
     for (i = 0; i < string.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
@@ -35,7 +35,6 @@ export const Header = () => {
       const value = (hash >> (i * 8)) & 0xff;
       color += `00${value.toString(16)}`.slice(-2);
     }
-    /* eslint-enable no-bitwise */
 
     return color;
   }
@@ -56,9 +55,19 @@ export const Header = () => {
           <HeaderOverlay>
             <Navigation>
               <div
-                style={{ display: 'flex', gap: '10px', alignItems: 'center' }}
+                style={{ display: 'flex', gap: '30px', alignItems: 'center' }}
               >
-                <IoIosContacts size={30} />
+                <Link to={routes.HOME}>
+                  <Logo>
+                    <LogoText>
+                      <div>&</div>
+                      <div>
+                        <p style={{ textDecoration: 'underline' }}>names</p>
+                        <p>numbers</p>
+                      </div>
+                    </LogoText>
+                  </Logo>
+                </Link>
                 <NavLink to={routes.HOME}>Home</NavLink>
                 {isLoggedIn && <NavLink to={routes.CONTACTS}>Contacts</NavLink>}
               </div>
@@ -81,7 +90,7 @@ export const Header = () => {
                   </div>
                 </LoggedIn>
               ) : (
-                <NavLink to={routes.LOGIN}>
+                <Link to={routes.LOGIN}>
                   <Button
                     style={{
                       color: 'lightblue',
@@ -91,7 +100,7 @@ export const Header = () => {
                   >
                     Log In
                   </Button>
-                </NavLink>
+                </Link>
               )}
             </Navigation>
           </HeaderOverlay>

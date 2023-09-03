@@ -5,8 +5,8 @@ export const Loader = () => {
   return (
     <LoaderContainer>
       <Oval
-        height={30}
-        width={30}
+        height={20}
+        width={20}
         color="#777777"
         wrapperStyle={{}}
         wrapperClass=""

@@ -34,7 +34,10 @@ a {
 }
 
 .active {
-  color: orange;
+  font-weight: 900;
+  border: 1px solid;
+  padding: 0px 10px;
+  border-radius: 20px;
 }
 
 ul,
