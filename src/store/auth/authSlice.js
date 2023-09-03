@@ -6,6 +6,7 @@ import {
   loginUserThunk,
   logoutUserThunk,
 } from './thunk';
+import { toast } from 'react-toastify';
 
 const handlePending = state => {
   state.isRefreshing = true;
@@ -13,6 +14,14 @@ const handlePending = state => {
 
 const handleRejected = state => {
   state.isRefreshing = false;
+};
+
+const handleLoginRejected = state => {
+  toast.error('The data is not correct');
+};
+
+const handleCreateRejected = state => {
+  toast.error('This mail is already registered');
 };
 
 const handleFulfilledCreate = (state, { payload }) => {
@@ -47,6 +56,8 @@ const authSlice = createSlice({
       .addCase(createUserThunk.fulfilled, handleFulfilledCreate)
       .addCase(logoutUserThunk.fulfilled, handleFulfilledLogout)
       .addCase(loginUserThunk.fulfilled, handleFulfilledLogin)
+      .addCase(loginUserThunk.rejected, handleLoginRejected)
+      .addCase(createUserThunk.rejected, handleCreateRejected)
       .addCase(getUserThunk.pending, handlePending)
       .addCase(getUserThunk.rejected, handleRejected)
       .addCase(getUserThunk.fulfilled, handleRefreshUser);

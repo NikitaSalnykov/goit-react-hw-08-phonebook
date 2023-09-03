@@ -43,6 +43,16 @@ export const SignInForm = () => {
           ) {
             <div style={notification}>Invalid email address</div>;
           }
+
+          if (!values.password) {
+            errors.password = <div style={notification}>Required</div>;
+          } else if (values.password.length < 7) {
+            errors.password = (
+              <div style={notification}>
+                Password must be at least 7 characters long
+              </div>
+            );
+          }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
