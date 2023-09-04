@@ -1,17 +1,37 @@
 import { DivContainer, Section } from 'components/App/App.styled';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { HomeContainer, ListWrapper, TextWrapper } from './Home.styled';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { HomeContainer, ListWrapper, RecommendedOverlay, TextWrapper } from './Home.styled';
 import { IoIosContacts } from 'react-icons/io';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { routes } from 'routes';
+import { Recommended } from 'components/Recommended/Recommended';
+import { getContactsThunk } from 'store/contacts/thunk';
+import { recommended, ukrainianEmbassiesInEurope } from 'data/dataContacts';
+
 const Home = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
+
+
 
   return (
     <Section>
       <DivContainer>
+        {isLoggedIn ?
+          <>
+                                <h2 style={{textAlign: 'center'}}>Useful contacts</h2>
+          <RecommendedOverlay>
+          <Recommended title={'Emergency services'} data={recommended}/>
+          <Recommended title={'Ukrainian Embassies In Europe '} data={ukrainianEmbassiesInEurope}/>
+            </RecommendedOverlay>
+          </>
+:
         <HomeContainer>
           <div>
             <IoIosContacts size={45} />
@@ -58,7 +78,7 @@ const Home = () => {
               <Button variant="contained">Create Your Contacts Book</Button>
             </Link>
           )}
-        </HomeContainer>
+        </HomeContainer>}
       </DivContainer>
     </Section>
   );

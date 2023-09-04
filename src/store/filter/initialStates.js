@@ -1,3 +1,4 @@
 export const filterInitialState = {
-  filter: ''
+  filter: '',
+  filterOptions: 'new'
 }

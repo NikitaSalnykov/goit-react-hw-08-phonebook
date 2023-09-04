@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { filterContacts } from 'store/filter/filterSlice';
-import { FilterWrapper } from './Filter.styled';
+import { filterContacts, filterOptions } from 'store/filter/filterSlice';
+import { FilterWrapper, SelectWrapper } from './Filter.styled';
 import { IoIosSearch } from 'react-icons/io';
-import { TextField } from '@mui/material';
+import { NativeSelect, TextField } from '@mui/material';
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -12,8 +12,12 @@ export const Filter = () => {
     dispatch(filterContacts(currentTarget.value));
   };
 
+  const handleSelect = ({ currentTarget }) => {
+    dispatch(filterOptions(currentTarget.value))
+  }
+
   return (
-    <FilterWrapper>
+        <FilterWrapper>
       <label style={{ marginRight: '14px' }} htmlFor="filter">
         <IoIosSearch size={20} />
       </label>
@@ -25,6 +29,18 @@ export const Filter = () => {
         onChange={handleFilter}
         variant="standard"
       />
+      <SelectWrapper  style={{marginLeft: '20px'}}>
+        <NativeSelect  
+          defaultValue={'new contacts'}
+          onChange={handleSelect}
+          
+  >
+    <option value={'new'}>New</option>
+    <option value={'a-z'}>A-Z</option>
+        <option value={'z-a'}>Z-A</option>
+            <option value={'old'}>Old</option>
+  </NativeSelect>
+ </SelectWrapper>
     </FilterWrapper>
   );
 };

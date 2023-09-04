@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'store/contacts/selectors';
 import { deleteContactsThunk } from 'store/contacts/thunk';
-import { getFilter } from 'store/filter/selectors';
+import { getFilter, getFilterOptions } from 'store/filter/selectors';
 import * as React from 'react';
 
 import List from '@mui/material/List';
@@ -16,52 +16,72 @@ import DeleteIcon from '@mui/icons-material/Delete';
 export const ContactList = () => {
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
-
+  const filterOption = useSelector(getFilterOptions);
   const contacts = useSelector(getContacts);
 
   const getFilteredContacts = () => {
     const normilizedFilterValue = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normilizedFilterValue)
+    
+      const filterResult = contacts.filter(contact =>
+        contact.name.toLowerCase().includes(normilizedFilterValue)
     );
-  };
 
-  const filteredContacts = getFilteredContacts();
+    switch (filterOption) {
+      case "new":
+ return filterResult.reverse()
+            case "old":
+         return filterResult
+              case "z-a":
+         return filterResult.slice().sort((a, b) => {
+          return b.name.localeCompare(a.name); 
+        });
+              case "a-z":
+         return filterResult.slice().sort((a, b) => {
+          return a.name.localeCompare(b.name); 
+        });
+    
+      default:
+         return filterResult
+    }
+    };
 
-  const onDeleteBtn = id => {
-    dispatch(deleteContactsThunk(id));
-  };
+    const filteredContacts = getFilteredContacts();
 
-  return (
-    <List>
-      {filteredContacts.map(contact => {
-        return (
-          <ListItem
-            key={contact.id}
-            secondaryAction={
-              <IconButton edge="end" aria-label="delete">
-                <DeleteIcon onClick={() => onDeleteBtn(contact.id)} />
-              </IconButton>
-            }
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <PersonIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <div>
-              <ListItemText
-                style={{ marginRight: '20px' }}
-                primary={`${contact.name}:`}
-              />
-              <ListItemText
-                style={{ marginRight: '20px' }}
-                secondary={contact.number}
-              />
-            </div>
-          </ListItem>
-        );
-      })}
-    </List>
-  );
-};
+    const onDeleteBtn = id => {
+      dispatch(deleteContactsThunk(id));
+    };
+
+    return (
+      <List>
+        {filteredContacts.map(contact => {
+          return (
+            <ListItem
+              key={contact.id}
+              secondaryAction={
+                <IconButton edge="end" aria-label="delete" onClick={() => onDeleteBtn(contact.id)}>
+                  <DeleteIcon  />
+                </IconButton>
+              }
+            >
+              <ListItemAvatar>
+                <Avatar>
+                  <PersonIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <div>
+                <ListItemText
+                  style={{ marginRight: '20px' }}
+                  primary={`${contact.name}:`}
+                />
+                <ListItemText
+                  style={{ marginRight: '20px' }}
+                  secondary={`tel. ${contact.number}`}
+                />
+              </div>
+            </ListItem>
+          );
+        })}
+      </List>
+    );
+  }
+

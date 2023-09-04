@@ -43,3 +43,22 @@ export const ListWrapper = styled.div`
   align-items: center;
   padding: 10px 20px;
 `;
+
+export const RecommendedOverlay = styled.div`
+display: flex;
+    gap: 20px;
+    flex-direction: column; 
+    padding: 20px 0px;
+
+  @media screen and (min-width: 375px) {
+
+  }
+  @media screen and (min-width: 768px) {
+
+  }
+  @media screen and (min-width: 1200px) {
+  flex-direction: row;
+
+  }
+
+`

@@ -7,9 +7,12 @@ export const filterSlice = createSlice({
   reducers: {
     filterContacts(state, action) {
       state.filter = action.payload
+    },
+    filterOptions(state, action) {
+      state.filterOptions = action.payload
     }
   }
 })
 
 export const filterReducer = filterSlice.reducer
-export const {filterContacts} = filterSlice.actions
+export const {filterContacts, filterOptions} = filterSlice.actions
