@@ -34,7 +34,6 @@ export const Recommended = ({ title, data }) => {
     }
   };
 
-  console.log(selected);
 
   const addContact = ({ name, number }) => {
     const existingContact = contacts.find(

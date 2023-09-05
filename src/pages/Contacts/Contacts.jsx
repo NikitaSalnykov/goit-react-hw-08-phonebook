@@ -17,6 +17,7 @@ const Contacts = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
+  const users = useSelector(state => state.contacts.contacts)
 
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const Contacts = () => {
             <ContactForm />
           </div>
           <ListWrapper>
-            <h2 style={{ marginBottom: '10px' }}>Contacts</h2>
+            <h2 style={{ marginBottom: '10px' }}>{users.length > 0 ? `Contacts (${users.length})` : 'Contacts'}</h2>
             <Filter />
             {isLoading && !error ? <ContactList /> : <Loader />}
           </ListWrapper>

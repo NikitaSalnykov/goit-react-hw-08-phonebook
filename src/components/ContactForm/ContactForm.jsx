@@ -38,7 +38,7 @@ export const ContactForm = () => {
       return;
     }
 
-    dispatch(createContactsThunk({ name, number }));
+    dispatch(createContactsThunk({ name , number }));
     Notiflix.Notify.success('Contact added successfully');
   };
 
@@ -66,6 +66,9 @@ export const ContactForm = () => {
         value={name}
         variant="outlined"
         label="Name"
+         inputProps={{
+          maxLength: 22
+        }}
       />
 
       <TextField
@@ -79,6 +82,9 @@ export const ContactForm = () => {
         value={number}
         variant="outlined"
         label="Number"
+         inputProps={{
+          maxLength: 24
+        }}
       />
       <Button style={{ marginTop: '10px' }} variant="contained" type="submit">
         Add to contacts

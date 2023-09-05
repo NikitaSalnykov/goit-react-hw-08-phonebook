@@ -15,13 +15,18 @@ import { Recommended } from 'components/Recommended/Recommended';
 import { getContactsThunk } from 'store/contacts/thunk';
 import { recommended, embassies } from 'data/dataContacts';
 import PushPinIcon from '@mui/icons-material/PushPin';
+import { FavoriteContact } from 'components/FavoriteContact/FavoriteContact';
+
 const Home = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const userInform = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
+  
+
 
   useEffect(() => {
     dispatch(getContactsThunk());
+    
   }, [dispatch]);
 
   return (
@@ -29,7 +34,7 @@ const Home = () => {
       <DivContainer>
         {isLoggedIn ? (
           <>
-            <HomeContainer style={{ marginBottom: '30px' }}>
+            <HomeContainer style={{ marginBottom: '10px' }}>
               <div>
                 <IoIosContacts size={45} />
               </div>
@@ -37,12 +42,13 @@ const Home = () => {
               <TextWrapper style={{ marginBottom: 0 }}>
                 <p>
                   Tired of losing your contacts and phone numbers? We're here to
-                  make your life easier and more organized. <b>Name&Numbers</b>{' '}
+                  make your life easier and more organized. <b>Name&Numbers</b>
                   is a convenient and reliable way to store your contacts and
                   phone numbers all in one place.
                 </p>
-              </TextWrapper>
+              </TextWrapper>   
             </HomeContainer>
+              <FavoriteContact/>
             <div>
               <h2
                 style={{

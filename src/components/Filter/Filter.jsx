@@ -30,7 +30,7 @@ export const Filter = () => {
         variant="standard"
       />
       <SelectWrapper  style={{marginLeft: '20px'}}>
-        <NativeSelect  
+        <NativeSelect  style={{width: '100px'}}
           defaultValue={'new contacts'}
           onChange={handleSelect}
           
@@ -38,7 +38,8 @@ export const Filter = () => {
     <option value={'new'}>New</option>
     <option value={'a-z'}>A-Z</option>
         <option value={'z-a'}>Z-A</option>
-            <option value={'old'}>Old</option>
+          <option value={'old'}>Old</option>
+          <option value={'favorite'}>Favorite</option>
   </NativeSelect>
  </SelectWrapper>
     </FilterWrapper>
